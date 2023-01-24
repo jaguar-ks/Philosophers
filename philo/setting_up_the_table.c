@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:35:30 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/24 17:36:38 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/24 18:27:12 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,4 @@ t_philo	*setting_up_table(t_inf in)
 {
 	t_philo	*tbl;
 
-	
 }

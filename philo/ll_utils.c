@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:37:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/24 18:16:46 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/24 18:27:04 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	del_node(t_philo *philo)
 {
 	if (pthread_detach(philo->thrd_id))
 		exit(error(-3));
-	if ( pthread_mutex_destroy(&philo->frk) ||
-		pthread_mutex_destroy(&philo->wrt))
+	if (pthread_mutex_destroy(&philo->frk)
+		|| pthread_mutex_destroy(&philo->wrt))
 		exit(error(-4));
-	free(philo);	
+	free(philo);
 }
 
 void	del_list(t_philo *philo)

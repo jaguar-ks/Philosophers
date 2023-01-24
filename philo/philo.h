@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/24 17:34:49 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/24 18:24:26 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,11 @@ typedef struct f_philo
 t_inf	init_info(int ac, char **av);
 /*errors handlling*/
 int		error(int er);
+/*creating a new node*/
+t_philo	*new_node(int id);
+/*deleting a node*/
+void	del_node(t_philo *philo);
+/*deleting a list*/
+void	del_list(t_philo *philo);
 
 #endif
