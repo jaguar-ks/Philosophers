@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/24 18:24:26 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/24 20:12:57 by deman_wolf       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,11 @@ t_philo	*new_node(int id);
 void	del_node(t_philo *philo);
 /*deleting a list*/
 void	del_list(t_philo *philo);
+/*adding node in the begginning of the list*/
+void	add_node_f(t_philo **ph, t_philo *n);
+/*preparing the table for dinnig*/
+t_philo	*setting_up_table(t_inf in);
+/*taking the last node*/
+t_philo	*last_node(t_philo *tbl);
 
 #endif
