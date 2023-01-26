@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_inf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 13:42:50 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/23 16:04:56 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/25 15:47:15 by deman_wolf       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ t_inf	init_info(int ac, char **av)
 	}
 	if (!check_inf(in))
 		exit(error(-2));
+	in.ct = 0;
 	return (in);
 }
