@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_inf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
+/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 13:42:50 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/25 15:47:15 by deman_wolf       ###   ########.fr       */
+/*   Updated: 2023/01/26 15:06:38 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ t_inf	init_info(int ac, char **av)
 	}
 	if (!check_inf(in))
 		exit(error(-2));
-	in.ct = 0;
+	pthread_mutex_init(&in.wrt, NULL);
 	return (in);
 }

@@ -3,24 +3,26 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+         #
+#    By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 13:58:24 by faksouss          #+#    #+#              #
-#    Updated: 2023/01/25 14:49:36 by deman_wolf       ###   ########.fr        #
+#    Updated: 2023/01/26 16:09:44 by faksouss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = errors.c\
+		actions.c\
 		init_inf.c\
 		ll_utils.c\
 		setting_up_the_table.c\
+		start_dinning.c\
 		main.c\
 
 OBJ_D = obj
 
 OBJ = $(addprefix $(OBJ_D)/,$(SRC:.c=.o))
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=thread
+FLAGS = -Wall -Wextra -Werror
 
 RM = rm -rf
 
