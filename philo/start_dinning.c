@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:55:00 by deman_wolf        #+#    #+#             */
-/*   Updated: 2023/01/26 17:36:08 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/26 18:13:19 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,27 @@ void	start_the_feast(t_nd nd)
 
 	i = 1;
 	j = 1;
+
 	while (1)
 	{
-		if (nd.inf.h_m_e)
-			if (*(nd.inf.h_m_e) == i)
-				break ;
-		if (!(nd.inf.h_m_e))
-			continue ;
 		id = nd.phls->philo_id;
-		while (nd.phls->philo_id % 2 == j && nd.phls->nxt->philo_id != id)
+		while (nd.phls->philo_id % 2 == j)
 		{
 			pthread_create(&(nd.phls->thrd_id), NULL, &eating, &nd);
 			pthread_join(nd.phls->thrd_id, NULL);
-			// pthread_create(&(inf.phls->nxt->thrd_id), NULL, &sleeping, &inf);
-			// pthread_join(infk.phls->nxt->thrd_id, NULL);
+			nd.phls = nd.phls->nxt->nxt;
+			if (nd.phls->philo_id == id)
+				break ;
+		}
+		if (nd.inf.nb_ph % 2 == 0)
+			nd.phls = nd.phls->nxt;
+		id = nd.phls->philo_id;
+		while (nd.phls->philo_id % 2 != j)
+		{
+			pthread_create(&(nd.phls->thrd_id), NULL, &sleeping, &nd);
+			pthread_join(nd.phls->thrd_id, NULL);
+			if (nd.phls->philo_id == id)
+				break ;
 			nd.phls = nd.phls->nxt->nxt;
 		}
 		if (j == 1)
@@ -59,5 +66,10 @@ void	start_the_feast(t_nd nd)
 		if (check_death(nd.phls))
 			break ;
 		i++;
+		if (nd.inf.h_m_e)
+			if (*(nd.inf.h_m_e) == i)
+				break ;
+		if (!(nd.inf.h_m_e))
+			continue ;
 	}
 }

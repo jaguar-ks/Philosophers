@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/26 17:35:23 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/26 18:15:38 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct f_philo
 	int				philo_id;
 	int				ct;
 	int				t_l;
-	int				t_s;
+	int				st;
 	pthread_mutex_t	frk;
 	struct f_philo	*nxt;	
 }	t_philo;
@@ -53,7 +53,7 @@ t_inf	init_info(int ac, char **av);
 /*errors handlling*/
 int		error(int er);
 /*creating a new node*/
-t_philo	*new_node(int id);
+t_philo	*new_node(int id, t_inf in);
 /*deleting a node*/
 void	del_node(t_philo *philo);
 /*deleting a list*/
