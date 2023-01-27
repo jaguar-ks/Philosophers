@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:37:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/26 17:59:13 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:19:36 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,17 @@ t_philo	*new_node(int id, t_inf inf)
 	if (!philo)
 		return (NULL);
 	philo->philo_id = id;
-	if (pthread_mutex_init(&(philo->frk), NULL))
-		return (free(philo), NULL);
+	pthread_mutex_init(&(philo->frk), NULL);
+	pthread_mutex_init(&(philo->st_l), NULL);
 	philo->t_l = inf.t_d;
+	philo->st = 'b';
 	philo->ct = 0;
+	philo->mc = 0;
+	philo->sc = 0;
+	if (id % 2 == 0)
+		philo->nc = 'e';
+	else
+		philo->nc = 'o';
 	philo->nxt = NULL;
 	return (philo);
 }
