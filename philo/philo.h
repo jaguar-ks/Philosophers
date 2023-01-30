@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/27 18:18:38 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/30 19:45:17 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ typedef struct f_inf
 	long			t_e;
 	long			t_s;
 	long			*h_m_e;
+	int				lp;
 	pthread_mutex_t	wrt;
-	struct f_philo	*phls;
+	pthread_mutex_t	st_l;
 }	t_inf;
 
 typedef struct f_philo
@@ -39,9 +40,6 @@ typedef struct f_philo
 	int				t_l;
 	int				st;
 	int				mc;
-	int				sc;
-	int				nc;
-	pthread_mutex_t	st_l;
 	pthread_mutex_t	frk;
 	struct f_philo	*nxt;	
 }	t_philo;
@@ -75,9 +73,8 @@ void	*sleeping(void *arg);
 /*thinking*/
 void	*thinking(void *arg);
 /*print the state of philosopher*/
-void	wht_the_philo_doing(t_inf *inf, t_philo *ph, char c);
+void	wht_the_philo_doing(t_philo *ph, char c);
 /*Sumilation*/
 void	start_the_feast(t_nd inf);
-
 
 #endif

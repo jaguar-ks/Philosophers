@@ -6,15 +6,15 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:06:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/27 18:15:46 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/30 20:15:58 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"philo.h"
 
-void	wht_the_philo_doing(t_inf *inf, t_philo *ph, char c)
+void	wht_the_philo_doing(t_philo *ph, char c)
 {
-	pthread_mutex_lock(&(inf->wrt));
+	// printf("time left to die>>[%d]\n", ph->t_l);
 	if (c == 't' || c == 's' || c == 'd' || c == 'f' || c == 'e')
 	{
 		printf("%d\t", ph->ct);
@@ -28,6 +28,8 @@ void	wht_the_philo_doing(t_inf *inf, t_philo *ph, char c)
 		printf("died\n");
 	else if (c == 'f')
 		printf("has taken a fork of philo[%d]\n", ph->philo_id);
+	// else if (c == 'w')
+	// 	printf("is waiting\n");
 	else if (c == 'e')
 	{
 		printf("has taken a fork of philo[%d]\n", ph->nxt->philo_id);
@@ -35,7 +37,6 @@ void	wht_the_philo_doing(t_inf *inf, t_philo *ph, char c)
 		printf("%d\t", ph->philo_id);
 		printf("is eating\n");
 	}
-	pthread_mutex_unlock(&(inf->wrt));
 }
 
 void	*eating(void *arg)
@@ -44,24 +45,24 @@ void	*eating(void *arg)
 	int		i;
 
 	in = *(t_nd *)arg;
-	if (in.phls->mc)
+	if (in.phls->mc == 1 && in.phls->st != 'd')
 		return (NULL);
-	pthread_mutex_lock(&(in.phls->st_l));
 	i = 0;
-	in.phls->sc = 0;
-	in.phls->st = 't';
 	pthread_mutex_lock(&(in.phls->frk));
 	in.phls->st = 'f';
-	wht_the_philo_doing(&in.inf, in.phls, in.phls->st);
+	wht_the_philo_doing(in.phls, in.phls->st);
 	in.phls->st = 'w';
 	pthread_mutex_lock(&(in.phls->nxt->frk));
+	if (in.phls->st == 'd')
+		return (NULL);
 	in.phls->st = 'e';
-	wht_the_philo_doing(&in.inf, in.phls, in.phls->st);
+	wht_the_philo_doing(in.phls, in.phls->st);
 	while (i < in.inf.t_e)
 	{
 		if (in.phls->t_l - i <= 0)
 		{
 			in.phls->st = 'd';
+			wht_the_philo_doing(in.phls, 'd');
 			break ;
 		}
 		else
@@ -71,9 +72,8 @@ void	*eating(void *arg)
 	}
 	in.phls->t_l = in.inf.t_d;
 	in.phls->mc = 1;
-	pthread_mutex_unlock(&(in.phls->nxt->frk));
 	pthread_mutex_unlock(&(in.phls->frk));
-	pthread_mutex_unlock(&(in.phls->st_l));
+	pthread_mutex_unlock(&(in.phls->nxt->frk));
 	return (NULL);
 }
 
@@ -83,17 +83,16 @@ void	*sleeping(void *arg)
 	int		i;
 
 	in = *(t_nd *)arg;
-	if (in.phls->sc)
+	if (in.phls->mc == 0 && in.phls->st != 'd')
 		return (NULL);
-	pthread_mutex_lock(&(in.phls->st_l));
-	in.phls->mc = 0;
 	i = 0;
 	in.phls->st = 's';
-	wht_the_philo_doing(&in.inf, in.phls, in.phls->st);
+	wht_the_philo_doing(in.phls, in.phls->st);
 	while (i < in.inf.t_s)
 	{
 		if (in.phls->t_l <= 0)
 		{
+			wht_the_philo_doing(in.phls, 'd');
 			in.phls->st = 'd';
 			break ;
 		}
@@ -101,8 +100,8 @@ void	*sleeping(void *arg)
 		in.phls->ct += 1;
 		i++;
 	}
-	in.phls->sc = 1;
-	pthread_mutex_unlock(&(in.phls->st_l));
+	in.phls->st = 't';
+	in.phls->mc = 0;
 	return (NULL);
 }
 
@@ -111,16 +110,18 @@ void	*thinking(void *arg)
 	t_nd	in;
 
 	in = *(t_nd *)arg;
-	pthread_mutex_lock(&(in.phls->st_l));
 	if (in.phls->st == 't')
-		wht_the_philo_doing(&in.inf, in.phls, in.phls->st);
-	while (!in.phls->mc)
+		wht_the_philo_doing(in.phls, in.phls->st);
+	while (in.phls->st == 'w' || in.phls->st == 't')
 	{
 		in.phls->t_l -= 1;
-		if (in.phls->t_l <= 0)
-			in.phls->st = 'd';
 		in.phls->ct += 1;
+		if (in.phls->t_l <= 0)
+		{
+			wht_the_philo_doing(in.phls, 'd');
+			in.phls->st = 'd';
+			break ;
+		}
 	}
-	pthread_mutex_unlock(&(in.phls->st_l));
 	return (NULL);
 }
