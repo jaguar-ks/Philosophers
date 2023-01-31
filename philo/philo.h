@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/30 19:45:17 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:36:49 by deman_wolf       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,22 @@
 
 typedef struct f_inf
 {
-	long			nb_ph;
-	long			t_d;
-	long			t_e;
-	long			t_s;
-	long			*h_m_e;
-	int				lp;
-	pthread_mutex_t	wrt;
-	pthread_mutex_t	st_l;
+	int	nb_ph;
+	int	t_d;
+	int	t_e;
+	int	t_s;
+	int	*h_m_e;
+	int	lp;
 }	t_inf;
 
 typedef struct f_philo
 {
-	pthread_t		thrd_id;
-	int				philo_id;
-	int				ct;
-	int				t_l;
-	int				st;
-	int				mc;
-	pthread_mutex_t	frk;
-	struct f_philo	*nxt;	
+	pthread_t			thrd_id;
+	int					philo_id;
+	unsigned long long	ct;
+	int					t_l;
+	int					st;
+	struct f_philo		*nxt;	
 }	t_philo;
 
 typedef struct f_nd
@@ -66,15 +62,11 @@ void	add_node_f(t_philo **ph, t_philo *n);
 t_philo	*setting_up_table(t_inf in);
 /*taking the last node*/
 t_philo	*last_node(t_philo *tbl);
-/*eating*/
-void	*eating(void *arg);
-/*sleeping*/
-void	*sleeping(void *arg);
-/*thinking*/
-void	*thinking(void *arg);
 /*print the state of philosopher*/
 void	wht_the_philo_doing(t_philo *ph, char c);
 /*Sumilation*/
 void	start_the_feast(t_nd inf);
+/*routine*/
+void	*routine(void *arg);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ll_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:37:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/30 19:43:25 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/01/31 15:48:47 by deman_wolf       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ t_philo	*new_node(int id, t_inf inf)
 	if (!philo)
 		return (NULL);
 	philo->philo_id = id;
-	pthread_mutex_init(&(philo->frk), NULL);
 	philo->t_l = inf.t_d;
 	philo->st = 'b';
 	philo->ct = 0;
-	philo->mc = 0;
 	philo->nxt = NULL;
 	return (philo);
 }
@@ -43,10 +41,6 @@ void	add_node_f(t_philo **ph, t_philo *n)
 
 void	del_node(t_philo *philo)
 {
-	if (pthread_mutex_destroy(&(philo->frk)))
-		exit(error(-4));
-	// if (pthread_detach(philo->thrd_id))
-	// 	exit(error(-3));
 	free(philo);
 }
 
