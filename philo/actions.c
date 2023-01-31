@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
+/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:06:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/31 16:35:37 by deman_wolf       ###   ########.fr       */
+/*   Updated: 2023/01/31 17:36:57 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*routine(void *arg)
 {
 	t_nd	nd;
 	int		cd;
-	
+
 	nd = *(t_nd *)arg;
 	if (nd.phls->t_l - nd.inf.t_e < 0 || !nd.phls->nxt)
 		return (nd.phls->st = 'd', NULL);
@@ -49,10 +49,11 @@ void	*routine(void *arg)
 	nd.phls->ct += nd.inf.t_e;
 	nd.phls->t_l = nd.inf.t_d;
 	cd = 1;
-	if (((nd.phls->philo_id % 2 == 0) && (nd.phls->nxt->philo_id == nd.inf.nb_ph))
-		|| (nd.phls->nxt->philo_id % 2 == 0) || nd.phls->philo_id == nd.inf.nb_ph)
+	if ((nd.phls->philo_id % 2 == 0 && nd.phls->nxt->philo_id == nd.inf.nb_ph)
+		|| nd.phls->nxt->philo_id % 2 == 0 || nd.phls->philo_id == nd.inf.nb_ph)
 	{
-		if ((nd.phls->philo_id % 2 == 0) && (nd.phls->nxt->philo_id == nd.inf.nb_ph))
+		if (nd.phls->philo_id % 2 == 0
+			&& nd.phls->nxt->philo_id == nd.inf.nb_ph)
 			cd = 2;
 		nd.phls->nxt->ct += nd.inf.t_e * cd;
 		nd.phls->nxt->t_l -= nd.inf.t_e * cd;
