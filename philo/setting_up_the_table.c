@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting_up_the_table.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
+/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:35:30 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/31 15:36:48 by deman_wolf       ###   ########.fr       */
+/*   Updated: 2023/02/02 22:23:19 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_philo	*setting_up_table(t_inf in)
 	tbl = NULL;
 	while (--i >= 0)
 		add_node_f(&tbl, new_node(i + 1, in));
-	if (in.nb_ph > 1)
-		last_node(tbl)->nxt = tbl;
+	last_node(tbl)->nxt = tbl;
 	return (tbl);
 }

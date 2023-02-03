@@ -6,7 +6,7 @@
 #    By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 13:58:24 by faksouss          #+#    #+#              #
-#    Updated: 2023/01/26 16:09:44 by faksouss         ###   ########.fr        #
+#    Updated: 2023/02/02 23:06:44 by faksouss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJ_D = obj
 
 OBJ = $(addprefix $(OBJ_D)/,$(SRC:.c=.o))
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror 
 
 RM = rm -rf
 

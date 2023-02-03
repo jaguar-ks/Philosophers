@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_inf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
+/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 13:42:50 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/31 16:37:24 by deman_wolf       ###   ########.fr       */
+/*   Updated: 2023/02/02 22:28:31 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ t_inf	init_info(int ac, char **av)
 	in.t_s = ft_atoi(av[4]);
 	in.h_m_e = (int *)malloc(sizeof(int));
 	in.lp = 0;
+	pthread_mutex_init(&in.prnt, NULL);
+	pthread_mutex_init(&in.wt, NULL);
 	if (ac == 6)
 		*in.h_m_e = ft_atoi(av[5]);
 	else

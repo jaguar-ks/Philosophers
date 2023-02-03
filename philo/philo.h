@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
+/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/01/31 16:36:49 by deman_wolf       ###   ########.fr       */
+/*   Updated: 2023/02/03 01:13:55 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@
 
 typedef struct f_inf
 {
-	int	nb_ph;
-	int	t_d;
-	int	t_e;
-	int	t_s;
-	int	*h_m_e;
-	int	lp;
+	int				nb_ph;
+	int				t_d;
+	int				t_e;
+	int				t_s;
+	int				*h_m_e;
+	int				lp;
+	pthread_mutex_t	prnt;
+	pthread_t		wrtr;
+	pthread_mutex_t	wt;
 }	t_inf;
 
 typedef struct f_philo
@@ -37,6 +40,7 @@ typedef struct f_philo
 	unsigned long long	ct;
 	int					t_l;
 	int					st;
+	pthread_mutex_t		f;
 	struct f_philo		*nxt;	
 }	t_philo;
 
@@ -63,10 +67,11 @@ t_philo	*setting_up_table(t_inf in);
 /*taking the last node*/
 t_philo	*last_node(t_philo *tbl);
 /*print the state of philosopher*/
-void	wht_the_philo_doing(t_philo *ph, char c);
+void	*wht_the_philo_doing(void *arg);
 /*Sumilation*/
-void	start_the_feast(t_nd inf);
+void	start_the_feast(t_nd inf, int id);
 /*routine*/
 void	*routine(void *arg);
+void	print_state(t_nd nd);
 
 #endif
