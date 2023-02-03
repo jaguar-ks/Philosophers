@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:55:00 by deman_wolf        #+#    #+#             */
-/*   Updated: 2023/02/03 16:49:52 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/03 22:24:34 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	nini(t_nd nd)
 {
 	if (nd.phls->philo_id == nd.inf.nb_ph && nd.inf.nb_ph % 2 != 0)
-		usleep(nd.inf.t_e * 3);
+		usleep(nd.inf.t_d * 3);
 	else
-		usleep(nd.inf.t_e * ((nd.phls->philo_id % 2 == 0) + 1));
+		usleep(nd.inf.t_d * ((nd.phls->philo_id % 2 == 0) + 1));
 }
 
 void	start_the_feast(t_nd nd, int id)
