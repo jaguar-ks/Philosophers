@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:06:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/03 23:20:34 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/04 00:54:26 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_death(t_nd nd)
 
 void	out(t_nd nd)
 {
-	del_list(nd.phls, nd.inf.nb_ph);
+	del_list(nd.phls, nd.phls->philo_id);
 	if (nd.inf.h_m_e)
 		free(nd.inf.h_m_e);
 	pthread_mutex_destroy(&nd.inf.prnt);
