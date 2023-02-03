@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 13:42:50 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/03 16:04:47 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/03 22:50:32 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ t_inf	init_info(int ac, char **av)
 	in.lp = 0;
 	pthread_mutex_init(&in.prnt, NULL);
 	pthread_mutex_init(&in.wt, NULL);
-	pthread_mutex_init(&in.d, NULL);
 	if (ac == 6)
 		*in.h_m_e = ft_atoi(av[5]);
 	else

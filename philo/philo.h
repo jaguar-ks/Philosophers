@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/03 16:17:05 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/03 22:51:09 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ void	*wht_the_philo_doing(void *arg);
 /*exiting function*/
 void	out(t_nd nd);
 /*costimized sleep*/
-void	nini(t_nd nd);
+// void	nini(t_nd nd, int id);
 
 #endif
