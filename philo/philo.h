@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
+/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/04 11:26:07 by deman_wolf       ###   ########.fr       */
+/*   Updated: 2023/02/04 23:30:25 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	*print_state(t_nd nd);
 void	*wht_the_philo_doing(void *arg);
 /*stop the program and exit*/
 void	out(t_nd nd);
-/*costimized sleep*/
+/*let see if someone died*/
+int		check_death(t_nd nd);
 // void	nini(t_nd nd, int id);
 
 #endif
