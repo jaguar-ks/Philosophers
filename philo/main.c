@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:53:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/05 00:03:28 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/05 01:15:42 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ int	ft_atoi(const char *str)
 	return (r * s);
 }
 
-int	check_inf(t_inf in)
+int	check_inf(t_inf in, int ac)
 {
 	if (in.nb_ph <= 0 || in.t_d < 0 || in.t_e < 0 || in.t_s < 0)
 		return (0);
-	if (in.h_m_e && *in.h_m_e < 0)
+	if (ac == 6 && (!in.h_m_e || *in.h_m_e <= 0))
 		return (0);
 	return (1);
 }
@@ -53,14 +53,15 @@ t_inf	init_info(int ac, char **av)
 	in.t_d = ft_atoi(av[2]);
 	in.t_e = ft_atoi(av[3]);
 	in.t_s = ft_atoi(av[4]);
-	in.h_m_e = (int *)malloc(sizeof(int));
 	if (ac == 6)
-		*in.h_m_e = ft_atoi(av[5]);
-	else
 	{
-		free(in.h_m_e);
-		in.h_m_e = NULL;
+		in.h_m_e = (int *)malloc(sizeof(int));
+		if (!in.h_m_e)
+			return (in);
+		*in.h_m_e = ft_atoi(av[5]);
 	}
+	else
+		in.h_m_e = NULL;
 	in.lp = 0;
 	pthread_mutex_init(&in.prnt, NULL);
 	pthread_mutex_init(&in.wt, NULL);
@@ -75,7 +76,7 @@ int	main(int ac, char **av)
 		nd.inf = init_info(ac, av);
 	else
 		return (error(-1));
-	if (!check_inf(nd.inf))
+	if (!check_inf(nd.inf, ac))
 		return (error(-2));
 	nd.phls = setting_up_table(nd.inf);
 	start_the_feast(nd, nd.phls->philo_id);

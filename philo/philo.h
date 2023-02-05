@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/04 23:30:25 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/05 00:52:18 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct f_inf
 	pthread_mutex_t	prnt;
 	pthread_t		wrtr;
 	pthread_mutex_t	wt;
-	pthread_mutex_t	d;
 }	t_inf;
 
 typedef struct f_philo

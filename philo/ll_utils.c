@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:37:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/04 23:40:56 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/05 00:54:46 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,13 @@ void	del_list(t_philo *philo, int id)
 	t_philo	*tmp;
 
 	tmp = philo;
-	while (tmp)
+	while (philo->philo_id != id)
 	{
-		if (philo->philo_id == id)
-			philo->nxt = NULL;
-		philo = philo->nxt;
 		del_node(tmp);
+		philo = philo->nxt;
 		tmp = philo;
 	}
+	del_node(tmp);
 }
 
 t_philo	*last_node(t_philo *tbl)

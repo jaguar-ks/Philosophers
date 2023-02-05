@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:06:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/04 23:52:07 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/05 01:09:31 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_death(t_nd nd)
 
 void	out(t_nd nd)
 {
-	del_list(nd.phls, nd.phls->philo_id);
+	del_list(nd.phls, nd.inf.nb_ph);
 	if (nd.inf.h_m_e)
 		free(nd.inf.h_m_e);
 	pthread_mutex_destroy(&nd.inf.prnt);
@@ -37,23 +37,17 @@ void	*wht_the_philo_doing(void *arg)
 
 	nd = *(t_nd *)arg;
 	pthread_mutex_lock(&nd.inf.prnt);
-	printf("%lld    ", nd.phls->ct);
-	printf("%d    ", nd.phls->philo_id);
 	if (nd.phls->st == 't')
-		printf("is thinking\n");
+		printf("%lld    %d    is thinking\n", nd.phls->ct, nd.phls->philo_id);
 	else if (nd.phls->st == 's')
-		printf("is sleeping\n");
+		printf("%lld    %d    is sleeping\n", nd.phls->ct, nd.phls->philo_id);
 	else if (nd.phls->st == 'd')
-		printf("died\n");
-	else if (nd.phls->st == 'f')
-		printf("has taken a fork\n");
-	else if (nd.phls->st == 'e')
-	{
-		printf("has taken a fork\n");
-		printf("%lld    ", nd.phls->ct);
-		printf("%d    ", nd.phls->philo_id);
-		printf("is eating\n");
-	}
+		printf("%lld    %d    died\n", nd.phls->ct, nd.phls->philo_id);
+	else if (nd.phls->st == 'f' || nd.phls->st == 'e')
+		printf("%lld    %d    has taken a fork\n", nd.phls->ct,
+			nd.phls->philo_id);
+	if (nd.phls->st == 'e')
+		printf("%lld    %d    is eating\n", nd.phls->ct, nd.phls->philo_id);
 	pthread_mutex_unlock(&nd.inf.prnt);
 	return (NULL);
 }
