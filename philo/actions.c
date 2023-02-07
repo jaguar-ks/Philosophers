@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:06:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/05 01:09:31 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/07 02:55:01 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ int	check_death(t_nd nd)
 {
 	static char	t;
 
+	pthread_mutex_lock(&nd.d);
 	if (t == 'd')
-		return (1);
+		return (pthread_mutex_unlock(&nd.d), 1);
 	t = nd.phls->st;
-	return (0);
+	return (pthread_mutex_unlock(&nd.d), 0);
 }
 
 void	out(t_nd nd)
@@ -29,6 +30,7 @@ void	out(t_nd nd)
 		free(nd.inf.h_m_e);
 	pthread_mutex_destroy(&nd.inf.prnt);
 	pthread_mutex_destroy(&nd.inf.wt);
+	pthread_mutex_destroy(&nd.d);
 }
 
 void	*wht_the_philo_doing(void *arg)
@@ -37,12 +39,12 @@ void	*wht_the_philo_doing(void *arg)
 
 	nd = *(t_nd *)arg;
 	pthread_mutex_lock(&nd.inf.prnt);
+	if (nd.phls->st == 'd')
+		return (NULL);
 	if (nd.phls->st == 't')
 		printf("%lld    %d    is thinking\n", nd.phls->ct, nd.phls->philo_id);
 	else if (nd.phls->st == 's')
 		printf("%lld    %d    is sleeping\n", nd.phls->ct, nd.phls->philo_id);
-	else if (nd.phls->st == 'd')
-		printf("%lld    %d    died\n", nd.phls->ct, nd.phls->philo_id);
 	else if (nd.phls->st == 'f' || nd.phls->st == 'e')
 		printf("%lld    %d    has taken a fork\n", nd.phls->ct,
 			nd.phls->philo_id);
@@ -54,11 +56,7 @@ void	*wht_the_philo_doing(void *arg)
 
 void	*print_state(t_nd nd)
 {
-	if (check_death(nd))
-		return (NULL);
 	pthread_mutex_lock(&nd.inf.wt);
-	if (nd.phls->st == 'd')
-		nd.phls->ct += nd.phls->t_l;
 	if (nd.phls->st == 'e')
 	{
 		pthread_mutex_unlock(&nd.phls->f);
@@ -68,7 +66,7 @@ void	*print_state(t_nd nd)
 	pthread_create(&nd.inf.wrtr, NULL, &wht_the_philo_doing, &nd);
 	pthread_join(nd.inf.wrtr, NULL);
 	pthread_mutex_unlock(&nd.inf.wt);
-	return (NULL);
+	return (&nd.phls->st);
 }
 
 void	*routine(void *arg)
@@ -76,8 +74,6 @@ void	*routine(void *arg)
 	t_nd	nd;
 
 	nd = *(t_nd *)arg;
-	if (check_death(nd))
-		return (NULL);
 	pthread_mutex_lock(&nd.phls->f);
 	if (nd.phls != nd.phls->nxt)
 		pthread_mutex_lock(&nd.phls->nxt->f);

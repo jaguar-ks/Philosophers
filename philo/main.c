@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:53:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/05 01:15:42 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/07 02:39:03 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	main(int ac, char **av)
 	if (!check_inf(nd.inf, ac))
 		return (error(-2));
 	nd.phls = setting_up_table(nd.inf);
+	pthread_mutex_init(&nd.d, NULL);
 	start_the_feast(nd, nd.phls->philo_id);
 	out(nd);
 }
