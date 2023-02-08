@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_dinning.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:55:00 by deman_wolf        #+#    #+#             */
-/*   Updated: 2023/02/07 02:55:58 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/08 03:12:54 by deman_wolf       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	start_the_feast(t_nd nd, int id)
 		while (1)
 		{
 			pthread_create(&nd.phls->thrd_id, NULL, &routine, &nd);
-			usleep(50);
+			usleep(80);
 			nd.phls = nd.phls->nxt;
 			if (nd.phls->philo_id == id)
 				break ;
@@ -40,11 +40,6 @@ void	start_the_feast(t_nd nd, int id)
 		while (1)
 		{
 			pthread_join(nd.phls->thrd_id, NULL);
-			if (nd.phls->st == 'd')
-			{
-				printf("%lld    %d    died\n", nd.phls->ct, nd.phls->philo_id);
-				return ;
-			}
 			nd.phls = nd.phls->nxt;
 			if (nd.phls->philo_id == id)
 				break ;

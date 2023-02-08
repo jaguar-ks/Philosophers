@@ -3,34 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:06:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/07 02:55:01 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/08 03:19:12 by deman_wolf       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"philo.h"
-
-int	check_death(t_nd nd)
-{
-	static char	t;
-
-	pthread_mutex_lock(&nd.d);
-	if (t == 'd')
-		return (pthread_mutex_unlock(&nd.d), 1);
-	t = nd.phls->st;
-	return (pthread_mutex_unlock(&nd.d), 0);
-}
 
 void	out(t_nd nd)
 {
 	del_list(nd.phls, nd.inf.nb_ph);
 	if (nd.inf.h_m_e)
 		free(nd.inf.h_m_e);
+	free(nd.died);
 	pthread_mutex_destroy(&nd.inf.prnt);
 	pthread_mutex_destroy(&nd.inf.wt);
-	pthread_mutex_destroy(&nd.d);
 }
 
 void	*wht_the_philo_doing(void *arg)
@@ -39,13 +28,17 @@ void	*wht_the_philo_doing(void *arg)
 
 	nd = *(t_nd *)arg;
 	pthread_mutex_lock(&nd.inf.prnt);
+	if (*nd.died == 'd')
+		return (nd.died);
+	*nd.died = nd.phls->st;
 	if (nd.phls->st == 'd')
-		return (NULL);
+		printf("%lld    %d    died\n", nd.phls->ct + nd.phls->t_l,
+			nd.phls->philo_id);
 	if (nd.phls->st == 't')
 		printf("%lld    %d    is thinking\n", nd.phls->ct, nd.phls->philo_id);
-	else if (nd.phls->st == 's')
+	if (nd.phls->st == 's')
 		printf("%lld    %d    is sleeping\n", nd.phls->ct, nd.phls->philo_id);
-	else if (nd.phls->st == 'f' || nd.phls->st == 'e')
+	if (nd.phls->st == 'f' || nd.phls->st == 'e')
 		printf("%lld    %d    has taken a fork\n", nd.phls->ct,
 			nd.phls->philo_id);
 	if (nd.phls->st == 'e')
@@ -66,7 +59,7 @@ void	*print_state(t_nd nd)
 	pthread_create(&nd.inf.wrtr, NULL, &wht_the_philo_doing, &nd);
 	pthread_join(nd.inf.wrtr, NULL);
 	pthread_mutex_unlock(&nd.inf.wt);
-	return (&nd.phls->st);
+	return (NULL);
 }
 
 void	*routine(void *arg)

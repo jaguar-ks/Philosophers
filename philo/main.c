@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:53:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/07 02:39:03 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/08 03:20:02 by deman_wolf       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ int	main(int ac, char **av)
 	if (!check_inf(nd.inf, ac))
 		return (error(-2));
 	nd.phls = setting_up_table(nd.inf);
-	pthread_mutex_init(&nd.d, NULL);
+	nd.died = (int *)malloc(sizeof(int));
+	if (!nd.died)
+		return (1);
+	*nd.died = nd.phls->st;
 	start_the_feast(nd, nd.phls->philo_id);
 	out(nd);
 }

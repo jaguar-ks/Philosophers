@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/07 02:38:39 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/08 03:01:23 by deman_wolf       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ typedef struct f_philo
 
 typedef struct f_nd
 {
+	int				*died;
 	struct f_inf	inf;
 	struct f_philo	*phls;
-	pthread_mutex_t	d;
 }	t_nd;
 
 /*initialasing the informations needed*/
@@ -77,8 +77,5 @@ void	*print_state(t_nd nd);
 void	*wht_the_philo_doing(void *arg);
 /*stop the program and exit*/
 void	out(t_nd nd);
-/*let see if someone died*/
-int		check_death(t_nd nd);
-// void	nini(t_nd nd, int id);
 
 #endif

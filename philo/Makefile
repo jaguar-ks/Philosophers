@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+         #
+#    By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 13:58:24 by faksouss          #+#    #+#              #
-#    Updated: 2023/02/07 02:54:14 by faksouss         ###   ########.fr        #
+#    Updated: 2023/02/08 03:09:49 by deman_wolf       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ OBJ_D = obj
 OBJ = $(addprefix $(OBJ_D)/,$(SRC:.c=.o))
 
 FLAGS = -Wall -Wextra -Werror -fsanitize=thread
-
 RM = rm -rf
 
 INC = philo.h
