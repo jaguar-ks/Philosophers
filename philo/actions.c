@@ -6,7 +6,7 @@
 /*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:06:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/08 03:19:12 by deman_wolf       ###   ########.fr       */
+/*   Updated: 2023/02/08 03:30:51 by deman_wolf       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*wht_the_philo_doing(void *arg)
 	nd = *(t_nd *)arg;
 	pthread_mutex_lock(&nd.inf.prnt);
 	if (*nd.died == 'd')
-		return (nd.died);
+		return (pthread_mutex_unlock(&nd.inf.prnt), NULL);
 	*nd.died = nd.phls->st;
 	if (nd.phls->st == 'd')
 		printf("%lld    %d    died\n", nd.phls->ct + nd.phls->t_l,
@@ -43,11 +43,12 @@ void	*wht_the_philo_doing(void *arg)
 			nd.phls->philo_id);
 	if (nd.phls->st == 'e')
 		printf("%lld    %d    is eating\n", nd.phls->ct, nd.phls->philo_id);
+	usleep(50);
 	pthread_mutex_unlock(&nd.inf.prnt);
 	return (NULL);
 }
 
-void	*print_state(t_nd nd)
+void	print_state(t_nd nd)
 {
 	pthread_mutex_lock(&nd.inf.wt);
 	if (nd.phls->st == 'e')
@@ -59,7 +60,6 @@ void	*print_state(t_nd nd)
 	pthread_create(&nd.inf.wrtr, NULL, &wht_the_philo_doing, &nd);
 	pthread_join(nd.inf.wrtr, NULL);
 	pthread_mutex_unlock(&nd.inf.wt);
-	return (NULL);
 }
 
 void	*routine(void *arg)
@@ -73,7 +73,7 @@ void	*routine(void *arg)
 	nd.phls->st = 'f';
 	print_state(nd);
 	if (nd.phls->t_l < nd.inf.t_e || nd.phls == nd.phls->nxt)
-		return (nd.phls->st = 'd', print_state(nd));
+		return (nd.phls->st = 'd', print_state(nd), NULL);
 	nd.phls->st = 'e';
 	print_state(nd);
 	nd.phls->ct += nd.inf.t_e;
@@ -81,7 +81,7 @@ void	*routine(void *arg)
 	nd.phls->st = 's';
 	print_state(nd);
 	if (nd.phls->t_l < nd.inf.t_s)
-		return (nd.phls->st = 'd', print_state(nd));
+		return (nd.phls->st = 'd', print_state(nd), NULL);
 	nd.phls->ct += nd.inf.t_s;
 	nd.phls->t_l -= nd.inf.t_s;
 	nd.phls->st = 't';

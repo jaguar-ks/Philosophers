@@ -6,7 +6,7 @@
 /*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:53:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/08 03:20:02 by deman_wolf       ###   ########.fr       */
+/*   Updated: 2023/02/08 03:25:42 by deman_wolf       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	main(int ac, char **av)
 	if (!nd.died)
 		return (1);
 	*nd.died = nd.phls->st;
+	printf("~|The address of nd.Died[%p]|\n", nd.died);
 	start_the_feast(nd, nd.phls->philo_id);
 	out(nd);
 }

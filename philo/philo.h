@@ -6,7 +6,7 @@
 /*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/08 03:01:23 by deman_wolf       ###   ########.fr       */
+/*   Updated: 2023/02/08 03:30:05 by deman_wolf       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	start_the_feast(t_nd inf, int id);
 /*routine*/
 void	*routine(void *arg);
 /*printing the state of the philosopher*/
-void	*print_state(t_nd nd);
+void	print_state(t_nd nd);
 /*print function*/
 void	*wht_the_philo_doing(void *arg);
 /*stop the program and exit*/
