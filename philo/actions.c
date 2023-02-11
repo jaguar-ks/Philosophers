@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:06:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/11 23:05:44 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/12 00:46:59 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void	out(t_nd nd)
 int	check_death(t_nd nd)
 {
 	pthread_mutex_lock(&nd.d);
+	usleep(50);
 	if (*nd.died == 'd')
-		nd.i += 1;
+		nd.i = 1;
 	else
 		*nd.died = nd.phls->st;
 	pthread_mutex_unlock(&nd.d);
@@ -39,7 +40,8 @@ void	*wht_the_philo_doing(void *arg)
 	t_nd		nd;
 
 	nd = *(t_nd *)arg;
-	if (nd.i >= 1)
+	pthread_mutex_lock(&nd.inf.prnt);
+	if (check_death(nd))
 		return (NULL);
 	if (nd.phls->st == 'd')
 		printf("%lld    %d    died\n", nd.phls->ct + nd.phls->t_l,
@@ -53,6 +55,7 @@ void	*wht_the_philo_doing(void *arg)
 			nd.phls->philo_id);
 	if (nd.phls->st == 'e')
 		printf("%lld    %d    is eating\n", nd.phls->ct, nd.phls->philo_id);
+	pthread_mutex_unlock(&nd.inf.prnt);
 	return (NULL);
 }
 
