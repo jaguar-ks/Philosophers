@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
+/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:06:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/08 03:30:51 by deman_wolf       ###   ########.fr       */
+/*   Updated: 2023/02/11 20:39:32 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,21 @@ void	out(t_nd nd)
 	free(nd.died);
 	pthread_mutex_destroy(&nd.inf.prnt);
 	pthread_mutex_destroy(&nd.inf.wt);
+	pthread_mutex_destroy(&nd.d);
+}
+
+int	check_death(t_nd nd)
+{
+	pthread_mutex_lock(&nd.d);
+	if (*nd.died == 'd')
+		nd.i = 1;
+	else
+	{
+		*nd.died = nd.phls->st;
+		nd.i = 0;
+	}
+	pthread_mutex_unlock(&nd.d);
+	return (nd.i);
 }
 
 void	*wht_the_philo_doing(void *arg)
@@ -27,10 +42,8 @@ void	*wht_the_philo_doing(void *arg)
 	t_nd		nd;
 
 	nd = *(t_nd *)arg;
-	pthread_mutex_lock(&nd.inf.prnt);
-	if (*nd.died == 'd')
-		return (pthread_mutex_unlock(&nd.inf.prnt), NULL);
-	*nd.died = nd.phls->st;
+	if (check_death(nd))
+		return (NULL);
 	if (nd.phls->st == 'd')
 		printf("%lld    %d    died\n", nd.phls->ct + nd.phls->t_l,
 			nd.phls->philo_id);
@@ -43,8 +56,6 @@ void	*wht_the_philo_doing(void *arg)
 			nd.phls->philo_id);
 	if (nd.phls->st == 'e')
 		printf("%lld    %d    is eating\n", nd.phls->ct, nd.phls->philo_id);
-	usleep(50);
-	pthread_mutex_unlock(&nd.inf.prnt);
 	return (NULL);
 }
 

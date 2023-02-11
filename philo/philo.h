@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: deman_wolf <deman_wolf@student.42.fr>      +#+  +:+       +#+        */
+/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/08 03:30:05 by deman_wolf       ###   ########.fr       */
+/*   Updated: 2023/02/11 20:38:44 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ typedef struct f_philo
 
 typedef struct f_nd
 {
-	int				*died;
+	pthread_mutex_t	d;
+	char			*died;
+	int				i;
 	struct f_inf	inf;
 	struct f_philo	*phls;
 }	t_nd;
