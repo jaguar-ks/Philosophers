@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/11 20:38:44 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/11 23:04:14 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	*routine(void *arg);
 void	print_state(t_nd nd);
 /*print function*/
 void	*wht_the_philo_doing(void *arg);
+/*check if the philosopher is dead*/
+int		check_death(t_nd nd);
 /*stop the program and exit*/
 void	out(t_nd nd);
 

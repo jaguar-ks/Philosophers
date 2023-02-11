@@ -6,11 +6,20 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:53:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/11 20:39:44 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/11 23:08:30 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"philo.h"
+
+int	error(int er)
+{
+	if (er == -1)
+		write(2, "Error: Invalid number of arguments\n", 36);
+	if (er == -2)
+		write(2, "Error: Wrong value of some arguments\n", 38);
+	return (1);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -84,7 +93,6 @@ int	main(int ac, char **av)
 		return (1);
 	pthread_mutex_init(&nd.d, NULL);
 	nd.i = 0;
-	printf("~|The address of nd.Died[%p]|\n", nd.died);
 	start_the_feast(nd, nd.phls->philo_id);
 	out(nd);
 }

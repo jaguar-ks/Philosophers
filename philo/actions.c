@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:06:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/11 20:39:32 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/11 23:05:44 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,9 @@ int	check_death(t_nd nd)
 {
 	pthread_mutex_lock(&nd.d);
 	if (*nd.died == 'd')
-		nd.i = 1;
+		nd.i += 1;
 	else
-	{
 		*nd.died = nd.phls->st;
-		nd.i = 0;
-	}
 	pthread_mutex_unlock(&nd.d);
 	return (nd.i);
 }
@@ -42,7 +39,7 @@ void	*wht_the_philo_doing(void *arg)
 	t_nd		nd;
 
 	nd = *(t_nd *)arg;
-	if (check_death(nd))
+	if (nd.i >= 1)
 		return (NULL);
 	if (nd.phls->st == 'd')
 		printf("%lld    %d    died\n", nd.phls->ct + nd.phls->t_l,
