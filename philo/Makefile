@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+         #
+#    By: faksouss <faksouss@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 13:58:24 by faksouss          #+#    #+#              #
-#    Updated: 2023/02/12 00:47:53 by faksouss         ###   ########.fr        #
+#    Updated: 2023/02/12 23:41:07 by faksouss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ_D = obj
 
 OBJ = $(addprefix $(OBJ_D)/,$(SRC:.c=.o))
 
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror -fsanitize=thread
 
 RM = rm -rf
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: faksouss <faksouss@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/11 23:04:14 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/02/12 23:30:47 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct f_philo
 
 typedef struct f_nd
 {
+	pthread_t		angl_of_dth;
 	pthread_mutex_t	d;
 	char			*died;
 	int				i;
@@ -70,15 +71,17 @@ t_philo	*setting_up_table(t_inf in);
 /*taking the last node*/
 t_philo	*last_node(t_philo *tbl);
 /*Sumilation*/
-void	start_the_feast(t_nd inf, int id);
+// void	start_the_feast(t_nd inf, int id);
+/*initialise the needed data*/
+void	init_nd(int ac, char **av, t_nd *nd);
 /*routine*/
 void	*routine(void *arg);
 /*printing the state of the philosopher*/
-void	print_state(t_nd nd);
+int		print_state(t_nd nd);
 /*print function*/
 void	*wht_the_philo_doing(void *arg);
 /*check if the philosopher is dead*/
-int		check_death(t_nd nd);
+void	*check_death(void *arg);
 /*stop the program and exit*/
 void	out(t_nd nd);
 
