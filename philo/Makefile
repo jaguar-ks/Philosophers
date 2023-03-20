@@ -6,11 +6,12 @@
 #    By: faksouss <faksouss@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 13:58:24 by faksouss          #+#    #+#              #
-#    Updated: 2023/02/12 23:41:07 by faksouss         ###   ########.fr        #
+#    Updated: 2023/03/20 01:45:23 by faksouss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = actions.c\
+SRC = errors.c\
+		actions.c\
 		ll_utils.c\
 		start_dinning.c\
 		main.c\
@@ -19,8 +20,7 @@ OBJ_D = obj
 
 OBJ = $(addprefix $(OBJ_D)/,$(SRC:.c=.o))
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=thread
-
+FLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 INC = philo.h

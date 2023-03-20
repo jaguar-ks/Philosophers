@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/12 23:30:47 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/03/20 00:56:49 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ typedef struct f_philo
 
 typedef struct f_nd
 {
-	pthread_t		angl_of_dth;
-	pthread_mutex_t	d;
-	char			*died;
-	int				i;
+	int				*died;
+	int				*wait;
 	struct f_inf	inf;
 	struct f_philo	*phls;
 }	t_nd;
@@ -71,17 +69,13 @@ t_philo	*setting_up_table(t_inf in);
 /*taking the last node*/
 t_philo	*last_node(t_philo *tbl);
 /*Sumilation*/
-// void	start_the_feast(t_nd inf, int id);
-/*initialise the needed data*/
-void	init_nd(int ac, char **av, t_nd *nd);
+void	start_the_feast(t_nd inf, int id);
 /*routine*/
 void	*routine(void *arg);
 /*printing the state of the philosopher*/
-int		print_state(t_nd nd);
+void	print_state(t_nd nd);
 /*print function*/
 void	*wht_the_philo_doing(void *arg);
-/*check if the philosopher is dead*/
-void	*check_death(void *arg);
 /*stop the program and exit*/
 void	out(t_nd nd);
 
