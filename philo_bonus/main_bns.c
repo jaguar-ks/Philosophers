@@ -84,6 +84,9 @@ int main(int ac, char **av)
 		return (error(-1));
     if (!check_inf(nd.inf, ac))
 		return (error(-2));
-    nd.ph = setting_up_table(nd.inf);
+    nd.phls = setting_up_table(nd.inf);
+	nd.frk = sem_open("fork", 0x0200, 0777, nd.inf.nb_ph);
+	nd.prnt = sem_open("print", 0x0200, 0777, 1);
     start_the_feast(nd);
+	out(nd);
 }

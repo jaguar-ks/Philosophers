@@ -44,18 +44,17 @@ void	add_node_f(t_philo **ph, t_philo *n)
 	}
 }
 
-void	del_list(t_philo *philo, int id)
+void	del_list(t_philo *philo)
 {
 	t_philo	*tmp;
 
 	tmp = philo;
-	while (philo->philo_id != id)
+	while (philo)
 	{
 		free(tmp);
 		philo = philo->nxt;
 		tmp = philo;
 	}
-	del_node(tmp);
 }
 
 t_philo	*last_node(t_philo *tbl)

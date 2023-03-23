@@ -20,6 +20,7 @@
 # include<pthread.h>
 # include<unistd.h>
 # include<semaphore.h>
+# include<sys/wait.h>
 
 typedef struct f_inf
 {
@@ -53,13 +54,13 @@ t_inf	init_info(int ac, char **av);
 int		error(int er);
 /*creating a new node*/
 t_philo	*new_node(int id, t_inf in);
-/*deleting a node*/
-void	del_node(t_philo *philo);
 /*deleting a list*/
-void	del_list(t_philo *philo, int id);
+void	del_list(t_philo *philo);
 /*adding node in the begginning of the list*/
 void	add_node_f(t_philo **ph, t_philo *n);
 /*preparing the table for dinnig*/
 t_philo	*setting_up_table(t_inf in);
+void    start_the_feast(t_nd nd);
+void	out(t_nd nd);
 
 #endif
