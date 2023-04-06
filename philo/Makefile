@@ -6,12 +6,11 @@
 #    By: faksouss <faksouss@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/23 13:58:24 by faksouss          #+#    #+#              #
-#    Updated: 2023/03/20 01:45:23 by faksouss         ###   ########.fr        #
+#    Updated: 2023/04/06 21:32:26 by faksouss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = errors.c\
-		actions.c\
+SRC = actions.c\
 		ll_utils.c\
 		start_dinning.c\
 		main.c\

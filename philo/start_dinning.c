@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:55:00 by deman_wolf        #+#    #+#             */
-/*   Updated: 2023/03/20 01:46:37 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/04/06 21:32:40 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	start_the_feast(t_nd nd, int id)
 {
 	while (1)
 	{
-		while (!nd.died)
+		while (1)
 		{
 			pthread_create(&nd.phls->thrd_id, NULL, &routine, &nd);
 			usleep(80);

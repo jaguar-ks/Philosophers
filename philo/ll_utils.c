@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ll_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faksouss <faksouss@student.42.fr>          +#+  +:+       +#+        */
+/*   By: faksouss <faksouss@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:37:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/02/05 00:54:46 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/04/06 21:31:47 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_philo	*new_node(int id, t_inf inf)
 	else if (inf.nb_ph % 2 == 1 && id == inf.nb_ph && inf.nb_ph > 1)
 		cd = 2;
 	philo->philo_id = id;
-	philo->t_l = inf.t_d / (cd + 1);
 	philo->st = 'b';
 	philo->ct = inf.t_e * cd;
+	philo->t_l = inf.t_d - philo->ct;
 	philo->nxt = NULL;
 	return (philo);
 }
