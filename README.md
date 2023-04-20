@@ -5,12 +5,12 @@
 1. [*Sure you have questions.*](#sure-you-have-questions)
 1. [*The **Thread's** functions to use.*](#the-threads-functions-to-use)
 1. [*The algo.*](#the-algo)
-    1. [The data sturcturs i used.](#the-data-structurs-i-used)
+    1. [The data structures I used.](#the-data-structures-i-used)
     1. [Initialising the linked list.](#initialising-the-linked-list)
 
 ## **The dining philosopher problem.**
 
-The Dining Philosophers problem is a classic OS problem that's usuallu stated in very non-OS terms: There are N philosphers sitting around a circular table eating spaghetti and discussing philosphy. The problem is that each philosopher needs 2 forks to eat, and there are only N forks, one between each 2 philosophers.
+The Dining Philosophers problem is a classic OS problem that's usually stated in very non-OS terms: There are N philosophers sitting around a circular table eating spaghetti and discussing philosophy. The problem is that each philosopher needs 2 forks to eat, and there are only N forks, one between every 2 philosophers.
 
 [ ![philo](./philo_dinning.png)](https://www.javatpoint.com/os-dining-philosophers-problem)
 
@@ -18,10 +18,10 @@ The Dining Philosophers problem is a classic OS problem that's usuallu stated in
 
 ## **The assignment.**
 
-You have to write a program that take the following arguments:
+You have to write a program that takes the following arguments:
 
-- **number of philosophers**: The number of philosophers and also the number of forks.
-- **time to die** (in milliseconds) : If a philosopher didn’t start eating time_to_die
+- **the number of philosophers**: The number of philosophers and also the number of forks.
+- **time to die** (in milliseconds): If a philosopher didn’t start eating time_to_die
 milliseconds since the beginning of their last meal or the beginning of the simulation, they die.
 - **time to eat** (in milliseconds): The time it takes for a philosopher to eat.
 During that time, they will need to hold two forks.
@@ -38,7 +38,7 @@ About the logs of your program, any state change of a philosopher must be format
 
 - *The_philosopher_current_timestamp*   *The_philosopher_id*   *The_action_the_philosopher_is_doing* 
 
-Keep in mind displaing state messages should not be mixed up with another messages. Also the message announcing a philosopher died should be displayed no more than 10 ms
+Keep in mind displaying state messages should not be mixed up with other messages. Also, the message announcing a philosopher died should be displayed no more than 10 ms
 after the actual death of the philosopher.
 
 **The specific rules for the project are:**
@@ -47,7 +47,7 @@ after the actual death of the philosopher.
 - There is one fork between each pair of philosophers. Therefore, if there are several
 philosophers, each philosopher has a fork on their left side and a fork on their right
 side. If there is only one philosopher, there should be only one fork on the table.
-- To prevent philosophers from duplicating forks, you should protect the forks state
+- To prevent philosophers from duplicating forks, you should protect the fork's state
 with a mutex for each of them.
 
 ![data_race](./data_race.png)
@@ -68,49 +68,49 @@ with a mutex for each of them.
 | Function | Description |
 | :-----: | :-------- |
 | pthread_create | The pthread_create() function is used to create a new thread, with attributes specified by attr, within a process.  If attr is NULL, the default attributes are used. |
-| pthread_detach | The pthread_detach() function is used to indicate to the implementation that storage for the thread thread can be reclaimed when the thread terminates. If thread has not terminated, pthread_detach() will not cause it to terminate. |
+| pthread_detach | The pthread_detach() function is used to indicate to the implementation that storage for the thread can be reclaimed when the thread terminates. If the thread has not terminated, pthread_detach() will not cause it to terminate. |
 | pthread_join | The pthread_join() function suspends execution of the calling thread until the target thread terminates unless the target thread has already terminated. |
 | pthread_mutex_init | The pthread_mutex_init() function creates a new mutex, with attributes specified with attr.  If attr is NULL the default attributes are used. |
-| pthread_mutex_destroy | The pthread_mutex_destroy() function frees the resources allocated for mutex.|
+| pthread_mutex_destroy | The pthread_mutex_destroy() function frees the resources allocated for the mutex.|
 | pthread_mutex_lock | The pthread_mutex_lock() function locks mutex.  If the mutex is already locked, the calling thread will block until the mutex becomes available. |
-| pthread_mutex_unlock | If the current thread holds the lock on mutex, then the pthread_mutex_unlock() function unlocks mutex.|
+| pthread_mutex_unlock | If the current thread holds the lock on the mutex, then the pthread_mutex_unlock() function unlocks the mutex.|
 
-> You can find more about each function on it's MAN page.
+> You can find more about each function on its MAN page.
 ***
 
 ## **The algo.**
 
-### *The data structurs i used:*
+### *The data structures I used:*
 
-> I use 3 structurs in my code:
+> I use 3 structures in my code:
 
-- **t_nd** a structur that hold the needed data to statrt the simulation and making sending all the necessary information to the rotine :
+- **t_nd** a structure that holds the needed data to start the simulation and making sending all the necessary information to the routine :
 ``` c
 typedef struct f_nd
 {
-	int				*wait; // The intiger pointer that used to send to pthread_join() function to store the rotine return value
-	struct f_inf	inf; // The data intred by the user
+	int				*wait; // The integer pointer that used to send to pthread_join() function to store the routine return value
+	struct f_inf	inf; // The data entered by the user
 	struct f_philo	*phls; // The linked list of the philosophers
 }	t_nd;
 ```
 ---
-- **t_inf** structur to store the data given by the user and other helpfull variables :
+- **t_inf** structure to store the data given by the user and other helpful variables :
 ``` c
 typedef struct f_inf
 {
-	int				nb_ph; // Number of philosophers setting around the table
+	int				nb_ph; // Number of philosophers sitting around the table
 	int				t_d; // Time to die if they didn't eat
-	int				t_e; // Time each philosopher should spent eating
-	int				t_s; // Time each philosopher should spent sleeping
-	int				*h_m_e; // The optional argiment of how many time should each philosopher eat
-	int				lp; // This variable its indicate how many time the simulation had looped
-	pthread_mutex_t	prnt; // This mutex is used to protect the the thread writing the state of the philosopher
+	int				t_e; // Time each philosopher should spend eating
+	int				t_s; // Time each philosopher should spend sleeping
+	int				*h_m_e; // The optional argument of how many times each philosopher should eat
+	int				lp; // This variable indicates how many times the simulation had looped
+	pthread_mutex_t	prnt; // This mutex is used to protect the thread writing the state of the philosopher
 	pthread_t		wrtr; // This is the thread used to write the state of the philosopher
 	pthread_mutex_t	wt; // This mutex is used to wait for the philosopher who is writing what he is doing
 }	t_inf;
 ```
 ---
-- **t_philo** is a linked list that holds the necessary information about each philosopher in the sumilation :
+- **t_philo** is a linked list that holds the necessary information about each philosopher in the simulation :
 ``` c
 typedef struct f_philo
 {
@@ -118,25 +118,25 @@ typedef struct f_philo
 	int					philo_id; // The philosopher ID or his place around the table
 	unsigned long long	ct; // The philosopher current time
 	int					t_l; // The time left for the philosopher to live
-	int					st; // The state of the philosopher or what is he doing on the current time
-	pthread_mutex_t		f; // The mutex that represent the fork
+	int					st; // The state of the philosopher or what is he doing at the current time
+	pthread_mutex_t		f; // The mutex that represents the fork
 	struct f_philo		*nxt; // The pointer to the next philosopher
 }	t_philo;
 ```
 ---
-> **Now before starting the simulation we need to initialise our linked list an fill it with the needed information.**
+> **Now before starting the simulation we need to initialise our linked list and fill it with the needed information.**
 
 ---
 
 ### *Initialising the linked list:*
-> The linked list that we are going to work with a serculair linked list so that mean that the next of the last node will be the first node in linken list but most importently that we going to focus on 2 variables of the node :
+> The linked list that we are going to work with is a circular linked list so which means that the next of the last node will be the first node in the linked list but most importantly that we going to focus on 2 variables of the node :
 ```c
 unsigned long long	ct; // The philosopher current time
 int					t_l; // The time left for the philosopher to live
 ```
-To initialise **the current time** and **the time left to live** first we need to know how many philosophers in the simulation we have 2 possibelities:
-- **The number of philosopher is even**:
-> *In this case **the current time** of the philosophers with **the odd numbers** as an ID will start from the **0**, and **the time left to live** will be **the time to die** if they didn't eat. But for the philosophers with **the even number** as an ID **there current time** will start from **(0 + time_to_eat)** because they will have to wait for the philosophers with the odd number in the id to finish the eating and put the forks back on the table, and for **the time left to live** will be **(time_to_die** - **time_to_eat)**.*
+To initialise **the current time** and **the time left to live** first we need to know how many philosophers are in the simulation we have 2 possibilities:
+- **The number of philosophers is even**:
+> *In this case **the current time** of the philosophers with **the odd numbers** as an ID will start from the **0**, and **the time left to live** will be **the time to die** if they didn't eat. But for the philosophers with **the even number** as an ID **their current time** will start from **(0 + time_to_eat)** because they will have to wait for the philosophers with the odd number in the id to finish eating and put the forks back on the table, and for **the time left to live** will be **(time_to_die** - **time_to_eat)**.*
 - **The number of philosophers is odd**:
-> *In this case we do the same as the previes case only one diffrence is the last node that represent the last philosopher he have to wait 2 times for the philosophers whit the odd befor him and the even numbers to finish eating becaus in the first raund he need his fork and the fork of the philosopher with the ID=1 and in the next time the philosopher befor him with the even ID number is gonna use the last one fork thats why the last philosopher **current time** is going to start from **(time_to_eat * 2)** and his **time left to live** will be **(time_to_die - (time_to_eat * 2))*** 
+> *, In this case, we do the same as the previous case the only difference is the last node that represents the last philosopher he had to wait 2 times for the philosopher what the odd before him and the even numbers to finish eating because in the first round, he needs his fork and the fork of the philosopher with the ID=1 and in the next time the philosopher before him with the even ID number is gonna use the last one fork that's why the last philosopher **current time** is going to start from **(time_to_eat * 2)** and his **time left to live** will be **(time_to_die - (time_to_eat * 2))*** 
 
