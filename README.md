@@ -141,5 +141,44 @@ To initialise **the current time** and **the time left to live** first we need t
 - **The number of philosophers is odd**:
 > *, In this case, we do the same as the previous case the only difference is the last node that represents the last philosopher he had to wait 2 times for the philosopher what the odd before him and the even numbers to finish eating because in the first round, he needs his fork and the fork of the philosopher with the ID=1 and in the next time the philosopher before him with the even ID number is gonna use the last one fork that's why the last philosopher **current time** is going to start from **(time_to_eat * 2)** and his **time left to live** will be **(time_to_die - (time_to_eat * 2))*** 
 ### **Start the simulation**
-After we setup the our linked list now we are ready to create the threads and lunch the simulation.
+After we setup our linked list now we are ready to create the threads and lunch the simulation.
+> *In an infinite loop we lunche the threads giving them the routine they should do but after lunching each one we use the **usleep()** function to wait a litlle bit before lunching the other one to send the philosophers with the odd ID number sepretly then the  philosophers with the even ID nuber as you can see in the exampele below.*
+```c
+pthread_create(&thrd_id, NULL, &routine, &arg);
+usleep(100);
+```
+> *After lunching the threads now let us move to the routine which represent the philosphers life cicle.*
+1. First the philosopher try to pick up his own fork than try to borows the fork of one sitting next to him. That means locking the mutexes that represents the forks as the exemple below.
+```c
+pthread_mutex_lock(&phls->f);
+pthread_mutex_lock(&phls->nxt->f);
+```
+2. If the philosopher succed picking up the forks than we print that the philosopher picked the fork as follows:
+```
+timestamp_in_ms X has taken a fork
+```
+3. After pickin up the forks we should check if the philosopher should die or not by checking if the time he had left to live is enough for him to eat if it is enough we print a message that the philosopher is eating as followes:
+```
+timestamp_in_ms X has taken a fork
+timestamp_in_ms X is eating
+```
+than add **the_time_to_eat** to **the_current_time** and reset **the_time_left_to_die** again to **the_time_to_die** else we add **the_time_left_to_die** to **the_current_time** and set the philosopher state to died and quite the routine.
 
+4. If the philosopher succed to eat that mean he should sleep so we releass the forks and print the philosopher is sleeping as follows:
+```
+timestamp_in_ms X is sleeping
+```
+than we check for the death again the same way we checked in th eating situation  by checking if the time he had left to live is enough for him to sleep if the philosopher should not die we add **the_time_to_sleep** to **the_current_time** and subtract it from **the_time_left_to_die** else we add **the_time_left_to_die** to **the_current_time** and set the philosopher state to died and quite the routine.
+
+5. If the philosopher succed to sleep than we print the philosopher is thinking as follows:
+```
+timestamp_in_ms X is thinking
+```
+and then quit the life sicle with out sending anything.
+
+6. After sending all the threads to execute the routine function we wait for them using **pthread_join()** function to see what value they return with if at least one of them return the state of a philosopher is died we print the followed message and quite the programme:
+```
+timestamp_in_ms X died
+```
+
+else we repeate the same thing again.
