@@ -71,7 +71,6 @@ with a mutex for each of them.
 | pthread_mutex_destroy | The pthread_mutex_destroy() function frees the resources allocated for mutex.|
 | pthread_mutex_lock | The pthread_mutex_lock() function locks mutex.  If the mutex is already locked, the calling thread will block until the mutex becomes available. |
 | pthread_mutex_unlock | If the current thread holds the lock on mutex, then the pthread_mutex_unlock() function unlocks mutex.|
-|
 
 > You can find more about each function on it's MAN page.
 ***
