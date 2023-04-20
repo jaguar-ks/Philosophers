@@ -7,6 +7,7 @@
 1. [*The algo.*](#the-algo)
     1. [The data structures I used.](#the-data-structures-i-used)
     1. [Initialising the linked list.](#initialising-the-linked-list)
+    1. [Start the sumilation.](#start-the-sumilation)
 
 ## **The dining philosopher problem.**
 
@@ -139,4 +140,6 @@ To initialise **the current time** and **the time left to live** first we need t
 > *In this case **the current time** of the philosophers with **the odd numbers** as an ID will start from the **0**, and **the time left to live** will be **the time to die** if they didn't eat. But for the philosophers with **the even number** as an ID **their current time** will start from **(0 + time_to_eat)** because they will have to wait for the philosophers with the odd number in the id to finish eating and put the forks back on the table, and for **the time left to live** will be **(time_to_die** - **time_to_eat)**.*
 - **The number of philosophers is odd**:
 > *, In this case, we do the same as the previous case the only difference is the last node that represents the last philosopher he had to wait 2 times for the philosopher what the odd before him and the even numbers to finish eating because in the first round, he needs his fork and the fork of the philosopher with the ID=1 and in the next time the philosopher before him with the even ID number is gonna use the last one fork that's why the last philosopher **current time** is going to start from **(time_to_eat * 2)** and his **time left to live** will be **(time_to_die - (time_to_eat * 2))*** 
+### **Start the simulation**
+After we setup the our linked list now we are ready to create the threads and lunch the simulation.
 
