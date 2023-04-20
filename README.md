@@ -4,6 +4,8 @@
 1. [*The assignment.*](#the-assignment)
 1. [*Sure you have questions.*](#sure-you-have-questions)
 1. [*The **Thread's** functions to use.*](#the-threads-functions-to-use)
+1. [*The algo.*](#the-algo)
+    1. [The data sturcturs i used](#the-data-structurs-i-used)
 
 ## **The dining philosopher problem.**
 
@@ -75,4 +77,47 @@ with a mutex for each of them.
 > You can find more about each function on it's MAN page.
 ***
 
+## The algo.
+
+### The data structurs i used:
+
+> I use 3 structurs in my code:
+
+- **t_nd** a structur that hold the needed data to statrt the simulation and making sending all the necessary information to the rotine :
+``` c
+typedef struct f_nd
+{
+	int				*wait; // The intiger pointer that used to send to pthread_join() function to store the rotine return value
+	struct f_inf	inf; // The data intred by the user
+	struct f_philo	*phls; // The linked list of the philosophers
+}	t_nd;
+```
+- **t_inf** structur to store the data given by the user and other helpfull variables :
+``` c
+typedef struct f_inf
+{
+	int				nb_ph; // Number of philosophers setting around the table
+	int				t_d; // Time to die if they didn't eat
+	int				t_e; // Time each philosopher should spent eating
+	int				t_s; // Time each philosopher should spent sleeping
+	int				*h_m_e; // The optional argiment of how many time should each philosopher eat
+	int				lp; // This variable its indicate how many time the simulation had looped
+	pthread_mutex_t	prnt; // This mutex is used to protect the the thread writing the state of the philosopher
+	pthread_t		wrtr; // This is the thread used to write the state of the philosopher
+	pthread_mutex_t	wt; // This mutex is used to wait for the philosopher who is writing what he is doing
+}	t_inf;
+```
+- **t_philo** is a linked list that holds the necessary information about each philosopher in the sumilation :
+``` c
+typedef struct f_philo
+{
+	pthread_t			thrd_id; // The thread ID
+	int					philo_id; // The philosopher ID or his place around the table
+	unsigned long long	ct; // The philosopher current time
+	int					t_l; // The time left for the philosopher to live
+	int					st; // The state of the philosopher or what is he doing on the current time
+	pthread_mutex_t		f; // The mutex that represent the fork
+	struct f_philo		*nxt; // The pointer to the next philosopher
+}	t_philo;
+```
 
