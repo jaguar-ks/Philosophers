@@ -5,7 +5,8 @@
 1. [*Sure you have questions.*](#sure-you-have-questions)
 1. [*The **Thread's** functions to use.*](#the-threads-functions-to-use)
 1. [*The algo.*](#the-algo)
-    1. [The data sturcturs i used](#the-data-structurs-i-used)
+    1. [The data sturcturs i used.](#the-data-structurs-i-used)
+    1. [Initialising the linked list.](#initialising-the-linked-list)
 
 ## **The dining philosopher problem.**
 
@@ -77,9 +78,9 @@ with a mutex for each of them.
 > You can find more about each function on it's MAN page.
 ***
 
-## The algo.
+## **The algo.**
 
-### The data structurs i used:
+### *The data structurs i used:*
 
 > I use 3 structurs in my code:
 
@@ -92,6 +93,7 @@ typedef struct f_nd
 	struct f_philo	*phls; // The linked list of the philosophers
 }	t_nd;
 ```
+---
 - **t_inf** structur to store the data given by the user and other helpfull variables :
 ``` c
 typedef struct f_inf
@@ -107,6 +109,7 @@ typedef struct f_inf
 	pthread_mutex_t	wt; // This mutex is used to wait for the philosopher who is writing what he is doing
 }	t_inf;
 ```
+---
 - **t_philo** is a linked list that holds the necessary information about each philosopher in the sumilation :
 ``` c
 typedef struct f_philo
@@ -120,4 +123,20 @@ typedef struct f_philo
 	struct f_philo		*nxt; // The pointer to the next philosopher
 }	t_philo;
 ```
+---
+> **Now before starting the simulation we need to initialise our linked list an fill it with the needed information.**
+
+---
+
+### *Initialising the linked list:*
+> The linked list that we are going to work with a serculair linked list so that mean that the next of the last node will be the first node in linken list but most importently that we going to focus on 2 variables of the node :
+```c
+unsigned long long	ct; // The philosopher current time
+int					t_l; // The time left for the philosopher to live
+```
+To initialise **the current time** and **the time left to live** first we need to know how many philosophers in the simulation we have 2 possibelities:
+- **The number of philosopher is even**:
+> *In this case **the current time** of the philosophers with **the odd numbers** as an ID will start from the **0**, and **the time left to live** will be **the time to die** if they didn't eat. But for the philosophers with **the even number** as an ID **there current time** will start from **(0 + time_to_eat)** because they will have to wait for the philosophers with the odd number in the id to finish the eating and put the forks back on the table, and for **the time left to live** will be **(time_to_die** - **time_to_eat)**.*
+- **The number of philosophers is odd**:
+> *In this case we do the same as the previes case only one diffrence is the last node that represent the last philosopher he have to wait 2 times for the philosophers whit the odd befor him and the even numbers to finish eating becaus in the first raund he need his fork and the fork of the philosopher with the ID=1 and in the next time the philosopher befor him with the even ID number is gonna use the last one fork thats why the last philosopher **current time** is going to start from **(time_to_eat * 2)** and his **time left to live** will be **(time_to_die - (time_to_eat * 2))** * 
 
