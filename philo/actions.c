@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:06:02 by faksouss          #+#    #+#             */
-/*   Updated: 2023/03/20 01:38:27 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:06:14 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	print_state(t_nd nd)
 			pthread_mutex_unlock(&nd.phls->nxt->f);
 	}
 	pthread_create(&nd.inf.wrtr, NULL, &wht_the_philo_doing, &nd);
-	pthread_join(nd.inf.wrtr, (void *)&nd.died);
+	pthread_join(nd.inf.wrtr, NULL);
 	pthread_mutex_unlock(&nd.inf.wt);
 }
 
@@ -61,15 +61,13 @@ void	*routine(void *arg)
 	t_nd	nd;
 
 	nd = *(t_nd *)arg;
-	if (nd.died)
-		return (NULL);
 	pthread_mutex_lock(&nd.phls->f);
 	if (nd.phls != nd.phls->nxt)
 		pthread_mutex_lock(&nd.phls->nxt->f);
 	nd.phls->st = 'f';
 	print_state(nd);
 	if (nd.phls->t_l < nd.inf.t_e || nd.phls == nd.phls->nxt)
-		return (nd.phls->st = 'd', nd.died = &nd.phls->st, nd.died);
+		return (nd.phls->st = 'd', &nd.phls->st);
 	nd.phls->st = 'e';
 	print_state(nd);
 	nd.phls->ct += nd.inf.t_e;
@@ -77,7 +75,7 @@ void	*routine(void *arg)
 	nd.phls->st = 's';
 	print_state(nd);
 	if (nd.phls->t_l < nd.inf.t_s)
-		return (nd.phls->st = 'd', nd.died = &nd.phls->st, nd.died);
+		return (nd.phls->st = 'd', &nd.phls->st);
 	nd.phls->ct += nd.inf.t_s;
 	nd.phls->t_l -= nd.inf.t_s;
 	nd.phls->st = 't';

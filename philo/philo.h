@@ -6,7 +6,7 @@
 /*   By: faksouss <faksouss@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:50:01 by faksouss          #+#    #+#             */
-/*   Updated: 2023/03/20 00:56:49 by faksouss         ###   ########.fr       */
+/*   Updated: 2023/04/20 13:07:05 by faksouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct f_philo
 
 typedef struct f_nd
 {
-	int				*died;
 	int				*wait;
 	struct f_inf	inf;
 	struct f_philo	*phls;
