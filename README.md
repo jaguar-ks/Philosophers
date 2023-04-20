@@ -3,6 +3,7 @@
 1. [*The dining philosopher problem.*](#the-dining-philosopher-problem)
 1. [*The assignment.*](#the-assignment)
 1. [*Sure you have questions.*](#sure-you-have-questions)
+1. [*The **Thread's** functions to use.*](#the-threads-functions-to-use)
 
 ## **The dining philosopher problem.**
 
@@ -48,6 +49,7 @@ with a mutex for each of them.
 
 ![data_race](./data_race.png)
 
+
 ---
 
 ## **Sure you have questions.**
@@ -56,6 +58,22 @@ with a mutex for each of them.
 - [What is a **mutex**?](https://www.geeksforgeeks.org/mutex-lock-for-linux-thread-synchronization/)
 - [what is **data race**?](https://www.mathworks.com/products/polyspace/static-analysis-notes/what-data-races-how-avoid-during-software-development.html#:~:text=Data%20races%20are%20a%20common,to%20undefined%20or%20unpredictable%20behavior.)
 
-
 ---
+
+## **The Thread's functions to use:**
+
+| Function | Description |
+| :-----: | :-------- |
+| pthread_create | The pthread_create() function is used to create a new thread, with attributes specified by attr, within a process.  If attr is NULL, the default attributes are used. |
+| pthread_detach | The pthread_detach() function is used to indicate to the implementation that storage for the thread thread can be reclaimed when the thread terminates. If thread has not terminated, pthread_detach() will not cause it to terminate. |
+| pthread_join | The pthread_join() function suspends execution of the calling thread until the target thread terminates unless the target thread has already terminated. |
+| pthread_mutex_init | The pthread_mutex_init() function creates a new mutex, with attributes specified with attr.  If attr is NULL the default attributes are used. |
+| pthread_mutex_destroy | The pthread_mutex_destroy() function frees the resources allocated for mutex.|
+| pthread_mutex_lock | The pthread_mutex_lock() function locks mutex.  If the mutex is already locked, the calling thread will block until the mutex becomes available. |
+| pthread_mutex_unlock | If the current thread holds the lock on mutex, then the pthread_mutex_unlock() function unlocks mutex.|
+|
+
+> You can find more about each function on it's MAN page.
+***
+
 
