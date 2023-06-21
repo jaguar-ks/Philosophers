@@ -79,7 +79,6 @@ int	main(int ac, char **av)
 	if (!check_inf(nd.inf, ac))
 		return (error(-2));
 	nd.phls = setting_up_table(nd.inf);
-	nd.died = NULL;
 	nd.wait = NULL;
 	start_the_feast(nd, nd.phls->philo_id);
 	out(nd);

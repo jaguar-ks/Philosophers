@@ -19,7 +19,6 @@ void	out(t_nd nd)
 		free(nd.inf.h_m_e);
 	pthread_mutex_destroy(&nd.inf.wt);
 	pthread_mutex_destroy(&nd.inf.prnt);
-	free(nd.died);
 }
 
 void	*wht_the_philo_doing(void *arg)
